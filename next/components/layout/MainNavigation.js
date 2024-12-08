@@ -23,7 +23,7 @@ function MainNavigation() {
                         <Link href='/quiz'>Quiz</Link>
                     </li>
                     <li>
-                        <Link href='/new-meetup'>Add Meetup</Link>
+                        <Link href='/new-meetup'>Add User</Link>
                     </li>
                 </ul>
             </nav>
