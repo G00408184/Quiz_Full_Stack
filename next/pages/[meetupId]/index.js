@@ -1,20 +1,14 @@
-import QuizDetail from '../../components/Quiz/QuizDetail'
-import { useRouter } from 'next/router'
-import GlobalContext from "../../pages/store/globalContext"
-import { useContext } from 'react'
+import {useContext} from "react";
+import QuizList from "../../components/Quiz/QuizList";
+import GlobalContext from "../store/globalContext";
 
-export default function () {
+
+function HomePage() {
     const globalCtx = useContext(GlobalContext)
-    const router = useRouter();
-
-    // Back to basics, a simple for loop. Also trim() comes into play as it usually does!
-    let returnVal = null
-    for (let ii = 0; ii < globalCtx.theGlobalObject.meetings.length; ii++) {
-        let temp = globalCtx.theGlobalObject.meetings[ii]
-        if (temp.meetingId.trim() == router.query.meetupId.trim()) {
-            returnVal = <QuizDetail image={temp.image} title={temp.title} description={temp.description} />
-        }
+    if (globalCtx.theGlobalObject.dataLoaded === true) {
+        return <QuizList meetups={globalCtx.theGlobalObject.meetings} />
     }
-    // In the real world, we'd put the code above in the store context module. 
-    return returnVal
+    return <div>Loading data from database, please wait . . . </div>
 }
+
+export default HomePage;
