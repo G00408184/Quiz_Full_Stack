@@ -1,16 +1,20 @@
-import MeetupDetail from '../../components/meetups/MeetupDetail'
-import { useRouter } from 'next/router';
+import QuizDetail from '../../components/Quiz/QuizDetail'
+import { useRouter } from 'next/router'
+import GlobalContext from "../../pages/store/globalContext"
+import { useContext } from 'react'
 
-function MeetupDetails() {
+export default function () {
+    const globalCtx = useContext(GlobalContext)
     const router = useRouter();
-    console.log("I'm a hard coded page; I'm supposed to be " + router.query.meetupId)
-    return (
-        <MeetupDetail
-            image='https://www.planetware.com/photos-large/SEY/best-islands-maldives.jpg'
-            title='Some address, Barna, Galway'
-            description='First meetup description' >
-        </MeetupDetail >
-    )
-}
 
-export default MeetupDetails;
+    // Back to basics, a simple for loop. Also trim() comes into play as it usually does!
+    let returnVal = null
+    for (let ii = 0; ii < globalCtx.theGlobalObject.meetings.length; ii++) {
+        let temp = globalCtx.theGlobalObject.meetings[ii]
+        if (temp.meetingId.trim() == router.query.meetupId.trim()) {
+            returnVal = <QuizDetail image={temp.image} title={temp.title} description={temp.description} />
+        }
+    }
+    // In the real world, we'd put the code above in the store context module. 
+    return returnVal
+}

@@ -1,12 +1,12 @@
 {
-  "name": "fullStackWeek9Lab2",
+  "name": "fullStackWeek10Lab2",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "../node_modules/.bin/next dev",
-    "build": "../node_modules/.bin/next build",
-    "start": "../node_modules/.bin/next start",
-    "lint": "../node_modules/.bin/next lint"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "next": "12.3.1",

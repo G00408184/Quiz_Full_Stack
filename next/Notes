@@ -1,0 +1,10 @@
+The homepage is in the pages  and index.js
+
+The GlobalContext in React is like a shared storage box for your app.
+It lets you store data in one central place so that all components in your app
+can access or update it directly, without needing to pass the data manually
+through props (which is called "prop-drilling").
+
+Typically only used for to temporarily store data for use within the app during a session.
+
+

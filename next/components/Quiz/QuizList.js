@@ -1,15 +1,15 @@
-import MeetupItem from './MeetupItem';
-import classes from './MeetupList.module.css';
+import QuizItem from './QuizItem';
+import classes from './QuizList.module.css';
 
-function MeetupList(props) {
+function QuizList(props) {
   return (
     <ul className={classes.list}>
       {props.meetups.map((meetup) => (
-        <MeetupItem
+        <QuizItem
           key={meetup.meetingId}
           id={meetup.meetingId}
           image={meetup.image}
-          title={meetup.title}
+          name={meetup.name}
           address={meetup.address}
         />
       ))}
@@ -17,4 +17,4 @@ function MeetupList(props) {
   );
 }
 
-export default MeetupList;
+export default QuizList;
