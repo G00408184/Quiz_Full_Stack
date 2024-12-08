@@ -1,0 +1,13 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.detail {
+  text-align: center;
+}
+
+.detail img {
+  width: 100%;
+}

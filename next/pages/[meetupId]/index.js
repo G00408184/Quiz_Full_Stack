@@ -1,16 +1,14 @@
-import MeetupDetail from '../../components/meetups/MeetupDetail'
-import { useRouter } from 'next/router';
+import {useContext} from "react";
+import QuizList from "../../components/Quiz/QuizList";
+import GlobalContext from "../store/globalContext";
 
-function MeetupDetails() {
-    const router = useRouter();
-    console.log("I'm a hard coded page; I'm supposed to be " + router.query.meetupId)
-    return (
-        <MeetupDetail
-            image='https://www.planetware.com/photos-large/SEY/best-islands-maldives.jpg'
-            title='Some address, Barna, Galway'
-            description='First meetup description' >
-        </MeetupDetail >
-    )
+
+function HomePage() {
+    const globalCtx = useContext(GlobalContext)
+    if (globalCtx.theGlobalObject.dataLoaded === true) {
+        return <QuizList meetups={globalCtx.theGlobalObject.meetings} />
+    }
+    return <div>Loading data from database, please wait . . . </div>
 }
 
-export default MeetupDetails;
+export default HomePage;

@@ -1,27 +1,19 @@
 // our-dimain.com/new-meetup
-import NewMeetupForm from '../../components/meetups/NewMeetupForm'
+import NewQuizAttempt from '../../components/Quiz/NewQuizAttempt'
 import { useRouter } from 'next/router';
-import GlobalContext from "../store/globalContext"
+import GlobalContext from "../../pages/store/globalContext"
 import { useContext } from 'react'
 
 function NewMeetupPage() {
-    const router = useRouter()
-    const globalCtx = useContext(GlobalContext)
+    const router = useRouter() // This allows user to go to toher pages
+    const globalCtx = useContext(GlobalContext)//
 
     async function addMeetupHandler(enteredMeetupData)  {
-        const response = await fetch('/api/new-meetup', {
-            method: 'POST',
-            body: JSON.stringify(enteredMeetupData),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        const data = await response.json();
-        globalCtx.updateGlobals({cmd: 'incMeetupCount'})
+        await globalCtx.updateGlobals({cmd: 'addMeeting', newVal: enteredMeetupData})
         router.push('/');
     }
 
-    return <NewMeetupForm onAddMeetup={addMeetupHandler} />
+    return <NewQuizAttempt onAddMeetup={addMeetupHandler} />
 }
 
 export default NewMeetupPage
