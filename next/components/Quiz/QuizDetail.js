@@ -1,4 +1,4 @@
-import classes from './QuizList.css'
+import classes from './QuizList.module.css'
 
 function QuizDetail(props) {
     return (

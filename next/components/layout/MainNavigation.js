@@ -1,74 +1,45 @@
-import classes from './MainNavigation.module.css'
-import Link from 'next/link'
-import HamMenu from "../generic/HamMenu"
-import HamMenuFAB from "../generic/HamMenuFAB"
-import { useContext } from 'react'
-import GlobalContext from "../../pages/store/globalContext"
-import HamMenuContent from "./HamMenuContent"
-import { useRouter } from 'next/router'
+import classes from './MainNavigation.module.css';
+import Link from 'next/link';
+import HamMenu from '../generic/HamMenu';
+import Button from '../generic/Button';
+import { GiShoppingCart } from 'react-icons/gi';
+import { useState, useContext } from 'react';
+import GlobalContext from '../../pages/store/globalContext';
 
 function MainNavigation() {
-  const globalCtx = useContext(GlobalContext)
-  const router = useRouter()
+    const [popupToggle, setPopupToggle] = useState(false);
+    const globalCtx = useContext(GlobalContext);
+    const theCount = globalCtx.theGlobalObject.count;
 
-  function toggleMenuHide() {
-    globalCtx.updateGlobals({cmd: 'hideHamMenu', newVal: false})
-  }
+    function checkoutCallback() {
+        console.log('Checkout button clicked');
+    }
 
+    function toggleMenuHide() {
+        setPopupToggle((prevState) => !prevState);
+    }
 
-  const contents = [
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'},    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-    {title: 'Challenge: fix this!', webAddress: '/'}, 
-
-  ]
-  return (
-    <header className={classes.header}>
-      <HamMenuContent contents={contents} />
-      <HamMenu toggleMenuHide={() => toggleMenuHide()} />
-      <HamMenuFAB toggleMenuHide={() => toggleMenuHide()} />
-      <nav>
-        <ul>
-          <li>
-            <Link href='/'>All Meetups</Link>
-          </li>
-          <li>
-            <Link href='/new-meetup'>Add New Meetup</Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  );
+    return (
+        <header className={classes.header}>
+            <HamMenu toggleMenuHide={toggleMenuHide} />
+            <div className={classes.logo}>MindFlux ({theCount})</div>
+            <nav>
+                <ul>
+                    <li>
+                        <Link href='/getMeetings'>All Meetups</Link>
+                    </li>
+                    <li>
+                        <Link href='/quiz'>Quiz</Link>
+                    </li>
+                    <li>
+                        <Link href='/new-meetup'>Add Meetup</Link>
+                    </li>
+                </ul>
+            </nav>
+            <Button text1="Checkout" maxWidth="100px" onClickHandler={checkoutCallback} icon={<GiShoppingCart />} />
+            <Button text2="Orders" maxWidth="70px" />
+        </header>
+    );
 }
 
-export default MainNavigation
+export default MainNavigation;
