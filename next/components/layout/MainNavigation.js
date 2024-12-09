@@ -19,9 +19,7 @@ function MainNavigation() {
                     <li>
                         <Link href='/getMeetings'>All Meetups</Link>
                     </li>
-                    <li>
-                        <Link href='/quiz'>Quiz</Link>
-                    </li>
+
                     <li>
                         <Link href='/new-meetup'>Add User</Link>
                     </li>
