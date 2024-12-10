@@ -9,7 +9,9 @@ import { createContext, useState, useEffect } from 'react'
 const GlobalContext = createContext()
 
 export function GlobalContextProvider(props) {
-    const [globals, setGlobals] = useState({ aString: 'init val', count: 0, hideHamMenu: true, meetings: [], dataLoaded: false })
+    const [globals, setGlobals] = useState(
+        { aString: 'init val', count: 0, hideHamMenu: true, meetings: [],
+            dataLoaded: false, score: 0,})
 
     useEffect(() => {
         getAllMeetings()
@@ -27,6 +29,13 @@ export function GlobalContextProvider(props) {
         setGlobals((previousGlobals) => { const newGlobals = JSON.parse(JSON.stringify(previousGlobals)); newGlobals.meetings = data.meetings; newGlobals.dataLoaded = true; return newGlobals })
     }
 
+    function updateScore(newScore) {
+        setGlobals((previousGlobals) => {
+            const newGlobals = JSON.parse(JSON.stringify(previousGlobals));
+            newGlobals.score = newScore;
+            return newGlobals
+        })
+    }
     async function editGlobalData(command) { // {cmd: someCommand, newVal: 'new text'}
         if (command.cmd == 'hideHamMenu') { // {cmd: 'hideHamMenu', newVal: false} 
             //  WRONG (globals object reference doesn't change) and react only looks at its 'value' aka the reference, so nothing re-renders:
@@ -55,7 +64,9 @@ export function GlobalContextProvider(props) {
 
     const context = {
         updateGlobals: editGlobalData,
-        theGlobalObject: globals
+        theGlobalObject: globals,
+        updateScore,
+        score: globals.score,
     }
 
     return <GlobalContext.Provider value={context}>
