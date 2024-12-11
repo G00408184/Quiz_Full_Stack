@@ -34,11 +34,11 @@ function NewQuizAttempt(props) {
       <Card>
         <form className={classes.form} onSubmit={submitHandler}>
           <div className={classes.control}>
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Username</label>
             <input type="text" required id="name" ref={titleInputRef} />
           </div>
           <div className={classes.control}>
-            <label htmlFor="image">Profile</label>
+            <label htmlFor="image">Profile Picture</label>
             <input type="url" required id="image" ref={imageInputRef} />
           </div>
           <div className={classes.actions}>

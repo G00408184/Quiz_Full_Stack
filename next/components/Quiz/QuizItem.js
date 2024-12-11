@@ -6,7 +6,7 @@ function QuizItem(props) {
   const router = useRouter();
 
   function showDetailsHandler() {
-    router.push('/' + props.id);
+    router.push('/score'); // Navigates to the score page
   }
 
   return (
@@ -19,7 +19,7 @@ function QuizItem(props) {
             <h3>{props.name}</h3>
           </div>
           <div className={classes.actions}>
-            <button onClick={showDetailsHandler}>Show Details</button>
+            <button onClick={showDetailsHandler}>Show Score</button>
           </div>
         </Card>
       </li>
@@ -27,4 +27,3 @@ function QuizItem(props) {
 }
 
 export default QuizItem;
-
