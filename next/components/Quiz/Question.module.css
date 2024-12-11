@@ -1,0 +1,71 @@
+.Quiz {
+    text-align: center;
+    margin: 2rem auto;
+    max-width: 600px;
+    padding: 2rem;
+    background: linear-gradient(145deg, #ffffff, #f1f1f1);
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.Quiz h1 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.options button {
+    display: inline-block;
+    font-size: 1rem;
+    color: #1a2920;
+    background: #ffffff;
+    border: 2px solid #1a2920;
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    margin: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.options button:hover {
+    background: #1a2920;
+    color: #ffffff;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.Quiz button {
+    font-size: 1rem;
+    color: #ffffff;
+    background: #1a2920;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 2rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.Quiz button:hover {
+    background: #145c42;
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .Quiz {
+        padding: 1.5rem;
+    }
+
+    .options button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .Quiz button {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
