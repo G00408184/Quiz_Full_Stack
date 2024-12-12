@@ -44,7 +44,7 @@ export function GlobalContextProvider(props) {
     }
 
     function updateScore(newScore) {
-        setGlobals((previousGlobals) => {
+        setGlobals((previousGlobals) => { // Convert the previousGlobals object to a string and then back to an object
             const newGlobals = JSON.parse(JSON.stringify(previousGlobals));
             newGlobals.score = newScore;
             return newGlobals;
@@ -77,7 +77,7 @@ export function GlobalContextProvider(props) {
         }
 
         if (command.cmd === 'addMeeting') {
-            const { name, image, score } = command.newVal; // Destructure the new values
+            const { name, image, score } = command.newVal;
             console.log('Entered Values:', { name, image, score });
 
             const newMeeting = { name: name, image: image, score: score }; // Create a new meeting object
