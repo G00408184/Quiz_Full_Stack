@@ -4,17 +4,24 @@
 // - makes debugging etc so much easier
 // - all external connections still have to go through /api routes 
 
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState, useEffect, useRef } from 'react';
 
-const GlobalContext = createContext()
+const GlobalContext = createContext();
 
 export function GlobalContextProvider(props) {
-    const [globals, setGlobals] = useState(
-        { aString: 'init val', count: 0, hideHamMenu: true, meetings: [],
-            dataLoaded: false, score: 0,})
+    const [globals, setGlobals] = useState({
+        aString: 'init val',
+        count: 0,
+        hideHamMenu: true,
+        meetings: [],
+        dataLoaded: false,
+        score: 0,
+        name: '',
+        image: '',
+    });
 
     useEffect(() => {
-        getAllMeetings()
+        getAllMeetings();
     }, []);
 
     async function getAllMeetings() {
@@ -26,39 +33,73 @@ export function GlobalContextProvider(props) {
             }
         });
         let data = await response.json();
-        setGlobals((previousGlobals) => { const newGlobals = JSON.parse(JSON.stringify(previousGlobals)); newGlobals.meetings = data.meetings; newGlobals.dataLoaded = true; return newGlobals })
+        console.log("Fetched Data:", data);
+
+        setGlobals((previousGlobals) => {
+            const newGlobals = JSON.parse(JSON.stringify(previousGlobals));
+            newGlobals.meetings = data.meetings;
+            newGlobals.dataLoaded = true;
+            return newGlobals;
+        });
     }
 
     function updateScore(newScore) {
         setGlobals((previousGlobals) => {
             const newGlobals = JSON.parse(JSON.stringify(previousGlobals));
             newGlobals.score = newScore;
-            return newGlobals
-        })
+            return newGlobals;
+        });
     }
-    async function editGlobalData(command) { // {cmd: someCommand, newVal: 'new text'}
-        if (command.cmd == 'hideHamMenu') { // {cmd: 'hideHamMenu', newVal: false} 
-            //  WRONG (globals object reference doesn't change) and react only looks at its 'value' aka the reference, so nothing re-renders:
-            //    setGlobals((previousGlobals) => { let newGlobals = previousGlobals; newGlobals.hideHamMenu = command.newVal; return newGlobals })
-            // Correct, we create a whole new object and this forces a re-render:
+
+
+    function updateName(newName) {
+        setGlobals((previousGlobals) => {
+            const newGlobals = JSON.parse(JSON.stringify(previousGlobals));
+            newGlobals.name = newName; // Change newName to name
+            return newGlobals;
+        });
+    }
+
+    function updateImage(newImage) {
+        setGlobals((previousGlobals) => {
+            const newGlobals = JSON.parse(JSON.stringify(previousGlobals));
+            newGlobals.image = newImage; // Change newImage to image
+            return newGlobals;
+        });
+    }
+    async function editGlobalData(command) {
+        if (command.cmd === 'hideHamMenu') {
             setGlobals((previousGlobals) => {
                 const newGlobals = JSON.parse(JSON.stringify(previousGlobals));
-                newGlobals.hideHamMenu = command.newVal; return newGlobals
-            })
+                newGlobals.hideHamMenu = command.newVal;
+                return newGlobals;
+            });
         }
-        if (command.cmd == 'addMeeting') {
+
+        if (command.cmd === 'addMeeting') {
+            const { name, image, score } = command.newVal; // Destructure the new values
+            console.log('Entered Values:', { name, image, score });
+
+            const newMeeting = { name: name, image: image, score: score }; // Create a new meeting object
+
             const response = await fetch('/api/new-Quiz', {
                 method: 'POST',
-                body: JSON.stringify(command.newVal),
+                body: JSON.stringify(newMeeting),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-            const data = await response.json(); // Should check here that it worked OK
-            setGlobals((previousGlobals) => {
-                const newGlobals = JSON.parse(JSON.stringify(previousGlobals))
-                newGlobals.meetings.push(command.newVal); return newGlobals
-            })
+
+            const data = await response.json(); // Check here that it worked OK
+            if (response.ok) {
+                setGlobals((previousGlobals) => {
+                    const newGlobals = JSON.parse(JSON.stringify(previousGlobals));
+                    newGlobals.meetings.push(newMeeting); // Add the new meeting to the meetings array
+                    return newGlobals;
+                });
+            } else {
+                console.error('Failed to add meeting:', data);
+            }
         }
     }
 
@@ -66,13 +107,18 @@ export function GlobalContextProvider(props) {
         updateGlobals: editGlobalData,
         theGlobalObject: globals,
         updateScore,
+        updateName,
+        updateImage,
         score: globals.score,
-    }
+        name: globals.name,
+        image: globals.image,
+    };
 
-    return <GlobalContext.Provider value={context}>
-        {props.children}
-    </GlobalContext.Provider>
+    return (
+        <GlobalContext.Provider value={context}>
+            {props.children}
+        </GlobalContext.Provider>
+    );
 }
 
-
-export default GlobalContext
+export default GlobalContext;

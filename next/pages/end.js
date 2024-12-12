@@ -18,7 +18,7 @@ function End() {
                         ? "Good job! Keep improving. 🌟"
                         : "Don't worry! Try again for a better score! 💪"}
             </p>
-            <div className={styles.btnContainer}> {/* Corrected class name */}
+            <div className={styles.btnContainer}>
                 <button
                     className={styles.backButton}
                     onClick={() => (window.location.href = "/")}

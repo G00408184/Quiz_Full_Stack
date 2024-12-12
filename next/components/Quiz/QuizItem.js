@@ -3,10 +3,13 @@ import classes from './QuizItem.module.css';
 import { useRouter } from 'next/router';
 
 function QuizItem(props) {
-  const router = useRouter();
+  console.log("QuizItem Props:", props); // Log the props to inspect their content
 
-  function showDetailsHandler() {
-    router.push('/score'); // Navigates to the score page
+  const router = useRouter();
+  console.log("Score Prop:", props.score);
+
+  function showDetailsHandler(score) {
+    router.push(`/score?score=${score}`);  // Navigates to the score page
   }
 
   return (
@@ -19,7 +22,7 @@ function QuizItem(props) {
             <h3>{props.name}</h3>
           </div>
           <div className={classes.actions}>
-            <button onClick={showDetailsHandler}>Show Score</button>
+            <button onClick={() => showDetailsHandler(props.score)}>Show Score</button>
           </div>
         </Card>
       </li>

@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import GlobalContext from "../pages/store/globalContext";
 import styles from "../components/Quiz/Score.module.css";
+import { useRouter } from 'next/router';
 
 function Score() {
-    const { score } = useContext(GlobalContext);
+    const router = useRouter();
+    const { score } = router.query; // Access the score from query parameters
+
 
     return (
         <div className={styles.container}>

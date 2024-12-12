@@ -1,18 +1,24 @@
-import { useRef } from 'react';
+import {useContext, useRef} from 'react';
 import Card from '../ui/Card';
 import classes from './NewQuizAttempt.module.css';
 import { useRouter } from 'next/router';
+import GlobalContext from "../../pages/store/globalContext";
+
 
 function NewQuizAttempt(props) {
   const titleInputRef = useRef();
   const imageInputRef = useRef();
   const router = useRouter();
+  const {updateName, updateImage  } = useContext(GlobalContext);
 
   async function submitHandler(event) {
     event.preventDefault();
 
     const enteredName = titleInputRef.current.value;
     const enteredImage = imageInputRef.current.value;
+
+    updateName(enteredName);
+    updateImage(enteredImage);
 
     const meetupData = {
       name: enteredName,

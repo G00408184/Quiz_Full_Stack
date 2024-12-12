@@ -3,13 +3,19 @@ import  {Questions} from "../components/generic/QuestionBank";
 import GlobalContext from "../pages/store/globalContext";
 import { useRouter } from 'next/router';
 import styles from "../components/Quiz/Question.module.css";
+import {router} from "next/client";
 
 function Quiz() {
     const { score, updateScore } = useContext(GlobalContext);
-    const router = useRouter();
+    const {name, image  } = useContext(GlobalContext);
+    const globalCtx = useContext(GlobalContext)//
+
+    console.log("name:", name)
+console.log("image:", image)
 
     const [currQuestion, setQuestion] = useState(0);
     const [optionChosen, setOptionChosen] = useState("");
+
 
     const nextQuestion = () => {
         if (Questions[currQuestion].answer === optionChosen) {
@@ -19,11 +25,19 @@ function Quiz() {
         setOptionChosen(""); // Reset chosen option
     };
 
-    const finishQuiz = () => {
+    const finishQuiz = async () => {
         if (Questions[currQuestion].answer === optionChosen) {
             updateScore(score + 1);
         }
-        router.push("/end"); // Navigate to the end page
+        const meetupData = {
+            name: name,
+            image: image,
+            score: score,
+        };
+        console.log("Meetup Data:", meetupData); // Print the meetupData object
+
+        await globalCtx.updateGlobals({cmd: 'addMeeting', newVal: meetupData})
+           router.push("/end"); // Navigate to the end page
     };
 
     return (
