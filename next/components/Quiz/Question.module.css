@@ -54,18 +54,4 @@
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 768px) {
-    .Quiz {
-        padding: 1.5rem;
-    }
 
-    .options button {
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
-    }
-
-    .Quiz button {
-        padding: 0.6rem 1.5rem;
-        font-size: 0.9rem;
-    }
-}

@@ -13,7 +13,7 @@ function MainNavigation() {
             <nav>
                 <ul>
                     <li>
-                        <Link href='/getMeetings'>All Meetups</Link>
+                        <Link href='/getMeetings'>All Users</Link>
                     </li>
 
                     <li>

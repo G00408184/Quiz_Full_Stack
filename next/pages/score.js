@@ -21,12 +21,6 @@ function Score() {
             <p className={styles.score}>Your Score: <span>{score}</span></p>
             <div className={styles.actions}>
                 <button
-                    className={styles.tryAgainButton}
-                    onClick={() => window.location.href = "/quiz"}
-                >
-                    Try Again
-                </button>
-                <button
                     className={styles.homeButton}
                     onClick={() => window.location.href = "/"}
                 >

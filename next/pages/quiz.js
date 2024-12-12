@@ -26,13 +26,15 @@ console.log("image:", image)
     };
 
     const finishQuiz = async () => {
+        let updatedScore = score;
         if (Questions[currQuestion].answer === optionChosen) {
+            updatedScore++;
             updateScore(score + 1);
         }
         const meetupData = {
             name: name,
             image: image,
-            score: score,
+            score: updatedScore,
         };
         console.log("Meetup Data:", meetupData); // Print the meetupData object
 
@@ -44,28 +46,23 @@ console.log("image:", image)
         <div className={styles.Quiz}>
             <h1>{Questions[currQuestion].prompt}</h1>
             <div className={styles.options}>
-                <button
-                    className={styles.optionButton}
-                    onClick={() => setOptionChosen("A")}
-                >
+                <button className={styles.optionButton}
+                    onClick={() => setOptionChosen("A")}>
                     {Questions[currQuestion].optionA}
                 </button>
                 <button
                     className={styles.optionButton}
-                    onClick={() => setOptionChosen("B")}
-                >
+                    onClick={() => setOptionChosen("B")}>
                     {Questions[currQuestion].optionB}
                 </button>
                 <button
                     className={styles.optionButton}
-                    onClick={() => setOptionChosen("C")}
-                >
+                    onClick={() => setOptionChosen("C")}>
                     {Questions[currQuestion].optionC}
                 </button>
                 <button
                     className={styles.optionButton}
-                    onClick={() => setOptionChosen("D")}
-                >
+                    onClick={() => setOptionChosen("D")}>
                     {Questions[currQuestion].optionD}
                 </button>
             </div>
