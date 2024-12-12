@@ -9,7 +9,7 @@ function NewMeetupPage() {
     const globalCtx = useContext(GlobalContext)//
 
     async function addMeetupHandler(enteredMeetupData)  {
-        await globalCtx.updateGlobals({cmd: 'addMeeting', newVal: enteredMeetupData})
+        //await globalCtx.updateGlobals({cmd: 'addMeeting', newVal: enteredMeetupData})
         router.push('/');
     }
 
