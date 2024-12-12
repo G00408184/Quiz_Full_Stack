@@ -10,7 +10,7 @@ function QuizList(props) {
           id={meetup.meetingId}
           image={meetup.image}
           name={meetup.name}
-          address={meetup.address}
+          score={meetup.score}
         />
       ))}
     </ul>

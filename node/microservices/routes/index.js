@@ -17,8 +17,10 @@ oldMong.connect('mongodb://127.0.0.1:27017/db');
 
 let meetingSchema = new Schema({
   name: String,        // Updated to lowercase "name"
-  image: String        // Added "image" field
+  image: String,
+  score: Number // Added "image" field
 }, { collection: 'Quiz' });
+
 
 let meetings = oldMong.model('Quiz', meetingSchema);
 
